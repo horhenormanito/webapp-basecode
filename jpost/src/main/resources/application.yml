@@ -1,0 +1,58 @@
+debug: true
+spring:
+  profiles:
+    default: local
+    active: local
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    mode: HTML
+  resources:
+    # 静的コンテンツをキャッシュする
+    cache:
+      period: 604800
+    chain:
+      # GZipされているリソースがあれば使う
+      compressed: true
+      strategy:
+        content:
+          # コンテンツのMD5ハッシュ値によるバージョニング
+          enabled: true
+          paths: /**   
+
+logging:
+  file: ${SPF_LOGGING_PATH:app-logs/}log-@project.artifactId@-app.log
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+    file: "%d %-5level [%thread] %logger : %msg%n"
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+  servlet:
+    session:
+      timeout: 7200
+      # URLにセッションIDを出力しないようにする
+      tracking-modes: cookie
+    #context-path: /yies
+    
+  # SpringBoot2.1のTomcatにkeepaliveのtimeout設定をする
+  # https://itneko.com/tomcat-keepalive/
+  tomcat:
+    connection-timeout: -1  # -1:無限のタイムアウト      
+#doma:
+#  dialect: POSTGRES
+#  # 小文字のスネークケースに変換する（firstName → first_name）
+#  naming: SNAKE_LOWER_CASE
+  # SQLファイルをキャッシュする
+#  sql-file-repository: GREEDY_CACHE
+  # バルクインサート・アップデートのサイズ
+#  batch-size: 1000
+  
+---
+spring:
+  profiles: test
+---
+spring:
+  profiles: production

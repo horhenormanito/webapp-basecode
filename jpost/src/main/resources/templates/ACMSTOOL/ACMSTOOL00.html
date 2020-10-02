@@ -1,0 +1,174 @@
+<html xmlns:th="http://www.thymeleaf.org" th:object="${ACMSTOOL00Form}" layout:decorate="~{base/main/layout}">
+<div layout:fragment="content">
+  <form method="post" th:action="@{/ACMSTOOL00}">
+    <!--/* [style] =============================================================================================== */-->
+    <!--/* [style] =============================================================================================== */-->
+    <!--/* [Main content] ======================================================================================== */-->
+
+      <!--/* ■■■■■ 検索条件 */-->
+      <div class="card card-outline card-info">
+        <div class="card-header">
+          <h3 class="card-title">検索条件</h3>
+          <div class="card-tools">
+            <button type="button" class="btn btn-sm btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="form-group row">
+            <label class="control-label col-sm-2" for="searchDateFrom">検索日時：</label>
+            <div class="col-sm-2">
+                <div class="input-group date" id="dateFromDiv" data-target-input="nearest">
+                <input type="text" data-target="#dateFromDiv" class="form-control form-control-sm datetimepicker-input" value="2020/01/01" size="10" th:field="*{dateFrom}">
+              <div class="input-group-append" data-target="#dateFromDiv" data-toggle="datetimepicker">
+                      <div class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-sm-auto">
+             　                  <label class="col-form-label">～</label>
+            </div>
+            <div class="col-sm-2">
+                <div class="input-group date" id="dateToDiv" data-target-input="nearest">
+                <input type="text" data-target="#dateToDiv" class="form-control form-control-sm datetimepicker-input" value="2020/01/01" size="10" th:field="*{dateTo}">
+              <div class="input-group-append" data-target="#dateToDiv" data-toggle="datetimepicker">
+                      <div class="input-group-text">
+                        <i class="far fa-calendar-alt"></i>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-sm-2" for="apexName">APEX名：</label>
+            <div class="col-sm-2">
+              <input type="text" class="form-control form-control-sm" value="" th:field="*{apexName}">
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-sm-2" for="comPortGroup">通信ポートグループ：</label>
+            <div class="col-sm-2">
+              <select class="form-control form-control-sm" id="comPortGroup">
+                      　　<option></option>
+                      　　<option>ポートグループ１</option>
+                      　　<option>ポートグループ２</option>
+                      　　<option>ポートグループ３</option>
+                      　　<option>ポートグループ４</option>
+                      　　<option>ポートグループ５</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-sm-2" for="hacchaku">発着信：</label>
+            <div class="col-sm-2">
+              <select class="form-control form-control-sm" id="hacchaku">
+                            　　<option></option>
+                            　　<option>発着信１</option>
+                            　　<option>発着信２</option>
+                            　　<option>発着信３</option>
+                            　　<option>発着信４</option>
+                            　　<option>発着信５</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <label class="control-label col-sm-2" for="protocol">プロトコル：</label>
+            <div class="col-sm-2">
+              <select class="form-control form-control-sm" id="protocol">
+                            　　<option></option>
+                            　　<option>プロトコル１</option>
+                            　　<option>プロトコル２</option>
+                            　　<option>プロトコル３</option>
+                            　　<option>プロトコル４</option>
+                            　　<option>プロトコル５</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer">
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-sm btn-primary btn-block col-sm-1" th:data-action-id="searchBtn">検索</button>
+            </div>
+        </div>
+      </div>
+
+      <div class="card card-outline card-info search-result">
+        <div class="card-header">
+          <h3 class="card-title">検索結果</h3>
+          <div class="card-tools">
+          </div>
+        </div>
+
+         <div class="card-body">
+            <table id="search-result-list-tbl" class="table table-bordered table-striped table-sm text-nowrap w-100">
+              <thead>
+                  <tr>
+                      <th>タスクID</th>
+                      <th>Working Group</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                <th:block th:each="apexCommTask, status : *{apexCommTaskList}">
+                  <tr>
+                      <td th:text="${apexCommTask.taskId}"></td>
+                      <td th:text="${apexCommTask.workingGroup}"></td>
+                      <td>
+                        <a href="#" class="detail-link"
+                            th:data-action-id="detailLink"
+                            th:data-row-number="${status.index}">
+                                                        詳細
+                         </a>
+                      </td>
+                  </tr>
+                 </th:block>
+               </tbody>
+            </table>
+         </div>
+
+      </div>
+
+    <!--/* [Main content] ======================================================================================== */-->
+  </form>
+</div>
+<!--/* [javascript] ========================================================================================= */-->
+<div layout:fragment="js.form">
+  <script th:inline="javascript">
+      $(function () {
+          formJs.vars = {
+          };
+
+          /* Search Result List Table */
+          $('#search-result-list-tbl').DataTable({
+               bLengthChange: true,
+               dom: "<'row'<'col-sm-12 col-md-12'<'title-bar'>plBt>>",
+               buttons: [
+                   { extend: 'csv',
+                     text: 'CSVダウンロード',
+                     charset: 'utf-8',
+                     fieldBoundary: '',
+                     filename: 'export',
+                     bom: true,
+                     exportOptions: {
+                         columns: [0,1]
+                     }
+                   }
+               ]
+          });
+          $("div.title-bar").html('Apex Communication Task Table');
+
+      });
+  </script>
+  <script th:src="@{js/ACMSTOOL/ACMSTOOL00.js}"></script>
+</div>
+<!--/* [javascript] ========================================================================================= */-->
+</html>

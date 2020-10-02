@@ -1,0 +1,31 @@
+spring:
+  profiles: local
+  messages:
+    cache-duration: -1
+  resources:
+    # キャッシュの無効化
+    cache:
+      period: 0
+  # --------------------------------------------------------------------------------
+  # datasource
+  # --------------------------------------------------------------------------------
+  datasource:
+    url: jdbc:postgresql://localhost:5432/apex_vis
+    username: admin
+    password: password
+    driver-class-name: org.postgresql.Driver
+    
+  mybatis:
+    #type-handlers-package: zsh.demos.postgres.mybatis.typehandler
+    mapper-locations: classpath*:/mybatis-mapper/*.xml
+    configuration:
+      cache-enabled: true
+      lazy-loading-enabled: true
+      multiple-result-sets-enabled: true
+      use-column-label: false
+
+  jpa:
+    properties:
+      hibernate: 
+        temp: 
+          use_jdbc_metadata_defaults: false

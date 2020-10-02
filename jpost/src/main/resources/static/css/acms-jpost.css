@@ -1,0 +1,184 @@
+/* adminlte.min.css
+-------------------------------------------------- */
+.layout-navbar-fixed .wrapper .main-header {
+    z-index: 1037;
+}
+
+.form-group {
+/*     margin-bottom: 1rem; */
+    margin-bottom: 0.5rem;
+}
+
+body {
+/*   background-color: #ffffff; */
+  background-color: #f4f6f9;
+}
+
+/* リサイズを無効にする */
+textarea {
+  resize: none;
+  overflow-y: scroll;
+}
+
+.card-body.p-0 .table tbody>tr>td:first-of-type, .card-body.p-0 .table tbody>tr>th:first-of-type,
+.card-body.p-0 .table thead>tr>td:first-of-type, .card-body.p-0 .table thead>tr>th:first-of-type
+{
+  /*     padding-left: 1.5rem; */
+  padding-left: 0.5rem;
+}
+
+.wrapper {
+  overflow: hidden;
+}
+
+.btn.disabled, .btn[disabled], fieldset[disabled] .btn, button[disabled] {
+/*     opacity: .65; */
+    opacity: .1;
+    cursor: not-allowed;
+}
+
+.btn-link.disabled, .btn-link[disabled]{
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+*:focus {
+ box-shadow:none !important;
+}
+
+/* エラー
+-------------------------------------------------- */
+.is-invalid {
+  color: #a94442;
+  border-color: #a94442;
+  background-color: #fff5ee;
+}
+
+.is-invalid:focus {
+  color: #a94442;
+  border-color: #843534;
+  background-color: #fff5ee;
+}
+
+/* ツールチップ
+-------------------------------------------------- */
+.tooltip-inner {
+  text-align: left;
+}
+
+/* Magnific-Popup
+-------------------------------------------------- */
+.mfp-iframe-holder .mfp-content {
+  width: 90%;
+  max-width: 90%;
+  height: 90%;
+}
+
+.mfp-iframe-holder {
+  padding-top: 30px;
+  padding-bottom: 5px;
+}
+
+.mfp-iframe-scaler iframe.mfp-iframe {
+  background: transparent;
+}
+
+.mfp-bg {
+  background: #777777;
+}
+
+/* tempusdominus-bootstrap-4
+-------------------------------------------------- */
+/* 土日の色付け */
+.datepicker-days th.dow:nth-last-child(2),
+.datepicker-days td:nth-last-child(2) {
+    color: #00f;
+}
+.datepicker-days th.dow:last-child,
+.datepicker-days td:last-child {
+    color: #f00;
+}
+
+/* テーブル
+-------------------------------------------------- */
+.dataTables_wrapper {
+  overflow: hidden;
+}
+.DTFC_RightBodyLiner {
+  overflow-x: hidden;
+}
+
+.dataTables_scrollBody {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table thead th, .table tbody th {
+    vertical-align: middle;
+    text-align: left !important;
+}
+.table tbody td {
+    vertical-align: middle;
+}
+
+.bootstrap-datetimepicker-widget thead th {
+    text-align: center !important;
+}
+
+.form-check-label, input[type='checkbox'], input[type='radio'] {
+    cursor: pointer;
+}
+
+.main-header {
+    background-color: #17a2b8;
+}
+
+/* Style to change separator  */
+.breadcrumb-item+.breadcrumb-item::before{
+  font-family: "Font Awesome 5 Free";
+  content: "\f101";
+  font-weight: 900;
+}
+
+.li-sub-item{
+  margin-left:5px;
+}
+
+.sidebar-title{
+  background:#17a2b8 !important;
+  color: white !important;
+}
+
+/* alternative responsive layout setting */
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 80vh;
+}
+
+/* datatables setting */
+div[class*="title-bar"]{
+  margin-top:12px;
+  white-space: nowrap;
+  float:left;
+  font-size:1.0em;
+}
+div.dataTables_paginate, div.paging_simple_numbers {
+  float:right;
+}
+
+div.dataTables_length {
+  float:right;
+  margin: 0 20px 0 0;
+}
+
+div.dataTables_length select{
+  font-size: 1.0em;
+  height: 5.0vh;
+  margin-top: 2px;
+}
+
+div.dt-buttons {
+  float:right;
+  margin: 2px 20px 0 0;
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+ * システム名             : ACMS Apex可視化ツール
+ * サブシステム名       : Dummy screen only
+ *
+ * 注意事項              : DAOマッパーのxmlファイル
+ *
+ * 更新履歴
+ * 2020/10/01    GDC)George.Carlon    新規作成
+ -->
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="jp.co.acms.jpost.web.ACMSTOOL99.dao.ACMSTOOL99DaoMapper" >
+    <resultMap id="baseResultMap" type="jp.co.acms.jpost.web.ACMSTOOL00.dto.ApexCommTask" >
+        <result column="taskid" property="taskId" jdbcType="VARCHAR" />
+        <result column="workinggroup" property="workingGroup" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="findAllApexCommTask" resultMap="baseResultMap">
+        SELECT
+          act.taskid,
+          act.workinggroup
+        FROM apex_comm_task act
+    </select>
+
+</mapper>

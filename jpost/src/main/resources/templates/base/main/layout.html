@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta layout:replace="~{base/meta::meta}"></meta>
+<style layout:replace="~{base/css::css}"></style>
+<title th:text="*{formName + '（'+ formId + '）'}"></title>
+</head>
+<body class="hold-transition layout-navbar-fixed sidebar-collapse">
+ <div class="wrapper">
+  <header layout:replace="~{base/main/main-header::header}"></header>
+  <aside layout:replace="~{base/main/main-sidebar::sidebar}"></aside>
+  <!--/* Content Wrapper. Contains page content */-->
+  <div class="content-wrapper">
+   <!-- /* breadcrumbs */ -->
+   <nav layout:replace="~{base/main/breadcrumbs::breadcrumbs}"></nav>
+
+   <!--/* Content Header (Page header) */-->
+   <div class="content-header">
+   </div>
+   <!--/* Main content */-->
+   <section class="content text-sm">
+    <!--/* [Main content] ========================================================================================= */-->
+    <div layout:fragment="content" th:remove="tag">【Screen ID】.html</div>
+    <!--/* [Main content] ========================================================================================= */-->
+   </section>
+  </div>
+  <!--/* Main Footer */-->
+  <footer layout:replace="~{base/main/main-footer::footer}"></footer>
+ </div>
+ <!--/* [script] =============================================================================================== */-->
+ <script layout:replace="~{base/js::js.JPOST}"></script>
+ <div layout:fragment="js.form" th:remove="tag">【Screen ID】.js</div>
+ <script layout:replace="~{base/js::js.JPOST.inline}"></script>
+ <!--/* [script] =============================================================================================== */-->
+</body>
+</html>

@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb" layout:fragment="breadcrumbs">
+  <form method="post" th:action="@{/breadcrumbLink}">
+    <!--/* 次画面ID(起動する画面ID) */-->
+    <input type="hidden" th:field="*{breadcrumbNextFormId}" />
+    <!-- page's breadcrumbs -->
+    <ol class="breadcrumb">
+      <th:block th:each="breadcrumb, status : *{@commonForm.breadcrumbs}" th:with="last=${status.last}">
+        <li class="breadcrumb-item active" aria-current="page" th:if="${last}">
+            <a th:text="${breadcrumb.breadcrumbName}" th:if="${last}"></a>
+        </li>
+        <li class="breadcrumb-item" th:unless="${last}">
+            <a href="#"
+               th:text="${breadcrumb.breadcrumbName}"
+               th:data-action-id="breadcrumbLink"
+               th:data-breadcrumb-next-form-id="${breadcrumb.formId}">
+            </a>
+        </li>
+      </th:block>
+    </ol>
+  </form>
+</nav>
+

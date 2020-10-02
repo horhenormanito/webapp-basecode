@@ -1,0 +1,55 @@
+<!-- jQuery : 先頭で読み込ませるため、meta.htmlに移動 -->
+<!-- popper -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/popper/umd/popper.min.js}"></script>
+<!-- moment -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/moment/moment.min.js}"></script>
+<!-- Bootstrap 4 -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!-- admin-lte3 -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/admin-lte3/js/adminlte.min.js}"></script>
+<!-- tempusdominus-bootstrap-4 -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js}"></script>
+<!-- magnific-popup -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/magnific-popup/jquery.magnific-popup.min.js}"></script>
+<!-- DataTables -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/datatables/jquery.dataTables.js}"></script>
+<script layout:fragment="js.JPOST" th:src="@{plugins/datatables-bs4/js/dataTables.bootstrap4.js}"></script>
+<!-- Datatable button and CSV download https://cdn.datatables.net/v/bs4/jszip-2.5.0/b-1.6.3/b-html5-1.6.3/datatables.min.js-->
+<script layout:fragment="js.JPOST" th:src="@{plugins/datatables-others/js/others.datatables.js}"></script>
+
+<!-- jquery.fademover -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/jquery-fademover/jquery.fademover.js}"></script>
+
+<!-- Chart API -->
+<!-- https://cdn.jsdelivr.net/npm/chart.js@2.8.0 -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/chart-graph/chart.js}"></script>
+<!-- https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/chart-graph/hammer.min.js}"></script>
+<!-- https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@0.7.7 -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/chart-graph/chartjs-plugin-zoom.js}"></script>
+<!-- https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/0.5.5/chartjs-plugin-annotation.min.js -->
+<script layout:fragment="js.JPOST" th:src="@{plugins/chart-graph/chartjs-plugin-annotation.min.js}"></script>
+
+  <!-- メインJS -->
+  <script layout:fragment="js.JPOST" th:src="@{js/acms-jpost.js}"></script>
+
+  <!-- inline js -->
+  <script layout:fragment="js.JPOST.inline" th:inline="javascript">
+    $(function() {
+    'use strict';
+     ACMS = new ACMS().init();
+     ACMS.vars = {
+        <!--/* BindingResult */-->
+        detailedErrors : /*[[${#fields.detailedErrors()}]]*/[],
+        validationMessage : /*[[${@messageUtils.getMessage("br.hasResult.message")}]]*/'',
+        <!--/* Result messages */-->
+        resultMessages : /*[[*{resultMessages}]]*/[],
+      };
+      Object.freeze(ACMS);
+      formJs.homeBindActionHandler();
+      formJs.homeReady();
+      formJs.bindActionHandler();
+      formJs.ready();
+      ACMS.events.load();
+     });
+</script>

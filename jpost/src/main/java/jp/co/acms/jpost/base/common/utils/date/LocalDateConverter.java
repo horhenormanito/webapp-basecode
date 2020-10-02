@@ -1,0 +1,36 @@
+
+package jp.co.acms.jpost.base.common.utils.date;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.core.convert.converter.Converter;
+
+import jp.co.acms.jpost.base.constant.WebConst;
+
+/**
+ * 文字列の入力値をLocalDate型に変換する
+ */
+public class LocalDateConverter implements Converter<String, LocalDate> {
+
+  private final DateTimeFormatter formatter;
+
+  public LocalDateConverter(String dateFormat) {
+    this.formatter = DateTimeFormatter.ofPattern(dateFormat);
+  }
+
+  @Override
+  public LocalDate convert(String source) {
+
+    if (StringUtils.isEmpty(source)) {
+      return null;
+    }
+
+    if (source.length() == WebConst.LOCALDATE_FORMAT_YYYYMM.length()) {
+      return LocalDate.parse(source + "/01", formatter);
+    }
+
+    return LocalDate.parse(source, formatter);
+  }
+}

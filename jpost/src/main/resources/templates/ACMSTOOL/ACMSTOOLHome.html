@@ -1,0 +1,48 @@
+<html xmlns:th="http://www.thymeleaf.org" th:object="${ACMSTOOLHomeForm}" layout:decorate="~{base/main/layout}">
+<div layout:fragment="content">
+    <!--/* [style] =============================================================================================== */-->
+    <!--/* [style] =============================================================================================== */-->
+    <!--/* [Main content] ======================================================================================== */-->
+
+         <!--/* ■■■■■ 検索条件 */-->
+         <div class="card card-outline card-info">
+           <div class="card-header">
+             <h3 class="card-title">ホームページセクション</h3>
+             <div class="card-tools">
+               <button type="button" class="btn btn-sm btn-tool" data-card-widget="collapse">
+                 <i class="fas fa-minus"></i>
+               </button>
+             </div>
+           </div>
+
+           <div class="card-body">
+             これはホームページです。<br/>
+             これはホームページです。<br/>
+             これはホームページです。<br/>
+             これはホームページです。<br/>
+             これはホームページです。<br/>
+           </div>
+
+           <div class="card-footer">
+
+           </div>
+         </div>
+     <!-- /.content -->
+
+    <!--/* [Main content] ======================================================================================== */-->
+
+</div>
+<!--/* [javascript] ========================================================================================= */-->
+<div layout:fragment="js.form">
+  <script th:inline="javascript">
+
+            $(function () {
+                formJs.vars = {
+                };
+            });
+
+        </script>
+  <!-- script th:src="@{js/YZ/YZA/YZAA010G/YZAA010G010.js}"></script-->
+</div>
+<!--/* [javascript] ========================================================================================= */-->
+</html>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE logback>
+
+<!-- Spring Bootでlogback-spring.xmlを使ったロガーの設定 -->
+<!-- https://tomokazu-kozuma.com/setting-loggers-using-logback-spring-xml-in-spring-boot/ -->
+<configuration>
+
+  <!-- Spring Bootデフォルトを読み込み -->
+  <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+	<!--ローカル環境用設定 -->
+	<springProfile name="default">
+	    <property name="logFilePath" value="./" />
+	    	 <!-- コンソール出力 -->
+		<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		    <target>System.out</target>
+		    <encoder>
+		        <charset>UTF-8</charset>
+		        <pattern>%d{yyyy/MM/dd HH:mm:ss} %-5level [%thread] - %msg%n</pattern>
+		    </encoder>
+		</appender>
+	</springProfile>
+
+	<!--develop環境用設定 -->
+	<springProfile name="develop">
+	    <property name="logFilePath" value="/var/log/develop/" />
+	    	 <!-- コンソール出力 -->
+		<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		    <target>System.out</target>
+		    <encoder>
+		        <charset>UTF-8</charset>
+		        <pattern>%d{yyyy/MM/dd HH:mm:ss} %-5level [%thread] - %msg%n</pattern>
+		    </encoder>
+		</appender>
+	</springProfile>
+
+  <!-- 開発端末 -->
+  <springProfile name="development">
+    <logger name="co.jp.acms.jpost">
+      <level value="INFO" />
+    </logger>
+    <logger name="co.jp.acms.jpost.base.domain">
+      <level value="INFO" />
+    </logger>
+    <logger name="co.jp.acms.jpost.web">
+      <level value="INFO" />
+    </logger>
+
+
+	 <!-- コンソール出力 -->
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	    <target>System.out</target>
+	    <encoder>
+	        <charset>UTF-8</charset>
+	        <pattern>%d{yyyy/MM/dd HH:mm:ss} %-5level [%thread] - %msg%n</pattern>
+	    </encoder>
+	</appender>
+  </springProfile>
+
+  <!-- 検証環境 -->
+  <springProfile name="testing">
+    <logger name="co.jp.acms.jpost">
+      <level value="INFO" />
+    </logger>
+    <logger name="co.jp.acms.jpost.base.domain">
+      <level value="ERROR" />
+    </logger>
+    <logger name="co.jp.acms.jpost.web">
+      <level value="ERROR" />
+    </logger>
+    <property name="LOG_FILE" value="/share/yies/log/multi/yies_web.log"/>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </encoder>
+      <file>${LOG_FILE}</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        <cleanHistoryOnStart>${LOG_FILE_CLEAN_HISTORY_ON_START:-false}</cleanHistoryOnStart>
+        <fileNamePattern>${ROLLING_FILE_NAME_PATTERN:-${LOG_FILE}.%d{yyyy-MM-dd}.%i.gz}</fileNamePattern>
+        <maxFileSize>${LOG_FILE_MAX_SIZE:-10MB}</maxFileSize>
+        <maxHistory>${LOG_FILE_MAX_HISTORY:-7}</maxHistory>
+        <totalSizeCap>${LOG_FILE_TOTAL_SIZE_CAP:-0}</totalSizeCap>
+      </rollingPolicy>
+    </appender>
+    <root>
+        <appender-ref ref="FILE" />
+    </root>
+  </springProfile>
+
+</configuration>

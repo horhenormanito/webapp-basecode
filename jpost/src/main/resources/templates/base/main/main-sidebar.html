@@ -1,0 +1,51 @@
+<!--/* Main Sidebar Container */-->
+<aside class="main-sidebar sidebar-light-primary elevation-4 position-fixed" layout:fragment="sidebar">
+
+  <!--/* Brand Logo */-->
+  <a href="#" class="brand-link logo-switch sidebar-title">
+    <span class="logo-xs">ACMS Apex可視化ツール</span>
+  <span class="logo-xl">
+    <strong>ACMS Apex可視化ツール</strong>
+       </span>
+  </a>
+
+  <form method="post" th:action="@{/functionMenuLink}">
+    <!--/* 次画面ID(起動する画面ID) */-->
+    <input type="hidden" th:field="*{nextFormId}" />
+
+    <!--/* Sidebar */-->
+    <div class="sidebar">
+      <!--/* Sidebar user panel (optional) */-->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image"></div>
+        <div class="info"></div>
+      </div>
+      <!--/* Sidebar Menu */-->
+
+      <!-- Sidebar Menu -->
+       <nav class="mt-2">
+         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview">
+           <li class="nav-item has-treeview menu-open">
+             <a href="#" class="nav-link" id="menu">システム <i class="right fas fa-angle-left"></i></a>
+             <ul class="nav nav-treeview">
+               <!--/* ■ SUBSYSTEM */-->
+               <th:block th:each="functionMenu, status : *{@commonForm.functionMenuList}" th:with="first=${status.first}">
+                 <li class="nav-item li-sub-item">
+                     <a class="nav-link"
+                         th:text="${functionMenu.menuName}"
+                         th:data-action-id="functionMenuLink"
+                         th:data-next-form-id="${functionMenu.menuId}">
+                     </a>
+                 </li>
+               </th:block>
+             </ul>
+           </li>
+         </ul>
+       </nav>
+      <!--/* /.sidebar-menu */-->
+
+    </div>
+    <!--/* /.sidebar */-->
+  </form>
+
+</aside>
