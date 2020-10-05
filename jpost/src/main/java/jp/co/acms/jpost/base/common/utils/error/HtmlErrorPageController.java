@@ -2,18 +2,15 @@
 package jp.co.acms.jpost.base.common.utils.error;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import jp.co.acms.jpost.base.constant.WebConst;
@@ -43,8 +40,8 @@ public class HtmlErrorPageController implements ErrorController {
   @RequestMapping(produces = MediaType.TEXT_HTML_VALUE)
   public ModelAndView myErrorHtml(HttpServletRequest req, ModelAndView mav) {
 
-    // エラー情報を取得
-    Map<String, Object> attr = getErrorAttributes(req);
+//    // エラー情報を取得
+//    Map<String, Object> attr = getErrorAttributes(req);
 
     // HTTP ステータスを決める
     HttpStatus status = getHttpStatus(req);
@@ -58,8 +55,8 @@ public class HtmlErrorPageController implements ErrorController {
 
     // 出力したい情報をセットする
     mav.addObject("status", status.value());
-    mav.addObject("error", attr.get("error"));
-    mav.addObject("trace", attr.get("trace"));
+//    mav.addObject("error", attr.get("error"));
+//    mav.addObject("trace", attr.get("trace"));
 
     // https://web.havincoffee.com/design/2015/06/1506171.html
     val messages = new ArrayList<String>();
@@ -104,12 +101,12 @@ public class HtmlErrorPageController implements ErrorController {
    * @param req リクエスト情報
    * @return エラー情報
    */
-  private static Map<String, Object> getErrorAttributes(HttpServletRequest req) {
-    // DefaultErrorAttributes クラスで詳細なエラー情報を取得する
-    ServletWebRequest swr = new ServletWebRequest(req);
-    DefaultErrorAttributes dea = new DefaultErrorAttributes(true);
-    return dea.getErrorAttributes(swr, true);
-  }
+//  private static Map<String, Object> getErrorAttributes(HttpServletRequest req) {
+//    // DefaultErrorAttributes クラスで詳細なエラー情報を取得する
+//    ServletWebRequest swr = new ServletWebRequest(req);
+//    DefaultErrorAttributes dea = new DefaultErrorAttributes(true);
+//    return dea.getErrorAttributes(swr, true);
+//  }
 
   /**
    * レスポンス用の HTTP ステータスを決める。

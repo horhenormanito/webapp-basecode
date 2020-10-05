@@ -20,12 +20,15 @@ spring:
           enabled: true
           paths: /**   
 
-logging:
-  file: ${SPF_LOGGING_PATH:app-logs/}log-@project.artifactId@-app.log
-  pattern:
-    console: "%d %-5level %logger : %msg%n"
-    file: "%d %-5level [%thread] %logger : %msg%n"
+#logging:
+#  file: ${SPF_LOGGING_PATH:app-logs/}log-@project.artifactId@-app.log
+#  pattern:
+#    console: "%d %-5level %logger : %msg%n"
+#    file: "%d %-5level [%thread] %logger : %msg%n"
 
+# ----------------------
+# Server configuration
+# ----------------------
 server:
   port: 8080
   compression:
@@ -34,22 +37,18 @@ server:
     session:
       timeout: 7200
       # URLにセッションIDを出力しないようにする
-      tracking-modes: cookie
-    #context-path: /yies
+#      tracking-modes: cookie
+    context-path: /
     
-  # SpringBoot2.1のTomcatにkeepaliveのtimeout設定をする
-  # https://itneko.com/tomcat-keepalive/
-  tomcat:
-    connection-timeout: -1  # -1:無限のタイムアウト      
-#doma:
-#  dialect: POSTGRES
-#  # 小文字のスネークケースに変換する（firstName → first_name）
-#  naming: SNAKE_LOWER_CASE
-  # SQLファイルをキャッシュする
-#  sql-file-repository: GREEDY_CACHE
-  # バルクインサート・アップデートのサイズ
-#  batch-size: 1000
-  
+# -----------------------
+# MyBatis configuration
+# -----------------------
+mybatis:
+  mapper-locations: classpath:mybatis-mapper/**/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl 
+    shrink-whitespaces-in-sql: true
+    
 ---
 spring:
   profiles: test

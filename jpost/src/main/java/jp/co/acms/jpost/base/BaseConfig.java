@@ -3,17 +3,12 @@ package jp.co.acms.jpost.base;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import javax.sql.DataSource;
-
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.modelmapper.ModelMapper;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import jp.co.acms.jpost.base.common.ACMSTOOLCommonForm;
@@ -46,15 +41,29 @@ public class BaseConfig {
   // ====================================================================================================
   // mybatis config
   // ====================================================================================================
-  @Bean
-  public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
-    final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-    sessionFactory.setDataSource(dataSource);
-    sessionFactory.setMapperLocations(
-        new PathMatchingResourcePatternResolver().getResources("classpath:mybatis-mapper/**/*.xml"));
+//  @Bean
+//  public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
+//    final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
+//    sessionFactory.setDataSource(dataSource);
+//    sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
+//        .getResources("classpath:mybatis-mapper/**/*.xml"));
+//
+//    return sessionFactory.getObject();
+//  }
 
-    return sessionFactory.getObject();
-  }
+//  @Autowired
+//  private DataSource dataSource;
+//
+//  public DataSource getDataSource() {
+//    return new TransactionAwareDataSourceProxy(dataSource);
+//  }
+//
+//  @Bean
+//  @Primary
+//  @ConfigurationProperties(prefix = "spring.datasource")
+//  public DataSource primaryDataSource(DataSourceProperties properties) {
+//    return properties.initializeDataSourceBuilder().build();
+//  }
 
   // ====================================================================================================
   // MessageSource
@@ -85,8 +94,8 @@ public class BaseConfig {
     // パターン指定でプロパティファイルの一覧を取得
     Resource[] rs;
     try {
-      rs = resourcePatternResolver
-          .getResources(ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + "/**/ACMSTOOL*/ACMSTOOL*.properties");
+      rs = resourcePatternResolver.getResources(
+          ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX + "/**/ACMSTOOL*/ACMSTOOL*.properties");
     } catch (IOException e) {
       e.printStackTrace();
       return messageSource;
